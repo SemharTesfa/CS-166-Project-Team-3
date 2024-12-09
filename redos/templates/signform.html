@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Catastrophic Regex Example</title>
+    </head>
+    <body>
+        <h1>Form with Regex (Unsafe)</h1>
+        <div>
+            <form id="form">
+                <label for="body">Input value for regex: </label>
+                <textarea type="text" id="input" name="input" placeholder="Enter text"></textarea>
+                <br/>
+                <button type="submit" id="submit-form">Submit</button>
+            </form>
+        </div>
+        <br>
+        <div id="response"></div>
+    </body>
+    <script src="{{url_for('static', filename='unsafe_regex.js')}}"></script>
+</html>

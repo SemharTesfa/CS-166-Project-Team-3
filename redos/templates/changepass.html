@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Change Password - Regex Injection Attack</title>
+    </head>
+    <body>
+        <h1>Change Password Form</h1>
+        <div>
+            <!-- Form for changing password -->
+            <form id="form" method="POST" action="/changepass">
+                <label for="oldpass">Old Password: </label>
+                <input type="password" id="oldpass" name="oldpass" placeholder="Enter your old password" required>
+                <br/>
+
+                <label for="newpass">New Password: </label>
+                <input type="password" id="newpass" name="newpass" placeholder="Enter your new password" required>
+                <br/>
+
+                <button type="submit" id="submit-form">Submit</button>
+            </form>
+        </div>
+        <br>
+        <div id="response"></div> <!-- To display response from the server -->
+    </body>
+
+    <script>
+        // Handle the form submission
+        document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Collect form data
+            const oldpass = document.getElementById('oldpass').value;
+            const newpass = document.getElementById('newpass').value;
+
+            // Send the data using fetch
+            fetch('/changepass', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded', // The request body format
+                },
+                body: `oldpass=${encodeURIComponent(oldpass)}&newpass=${encodeURIComponent(newpass)}` // Sending form data
+            })
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => {
+                // Display the response in the #response div
+                document.getElementById('response').innerHTML = `
+                    <h2>Result</h2>
+                    <p><strong>Status:</strong> ${data.success ? 'Success' : 'Error'}</p>
+                    <p><strong>Message:</strong> ${data.message}</p>
+                    ${data.time ? `<p><strong>Response Time:</strong> ${data.time} seconds</p>` : ''}
+                    ${data.payload  && data.searched? `<p><strong>Searched for:</strong> ${data.payload} <strong>inside:</strong> ${data.searched}</p>`: ''}
+                `;
+            })
+            .catch(error => {
+                document.getElementById('response').innerHTML = `<p>Error: ${error}</p>`;
+            });
+        });
+    </script>
+</html>
