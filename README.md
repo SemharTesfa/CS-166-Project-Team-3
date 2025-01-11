@@ -1,7 +1,7 @@
 # Network Security Simulations
 
 ## Project Overview
-This project is designed to simulate and analyze different types of network attacks, specifically ICMP Flood Attacks, SYN Flood Attacks, and Regex Injection Attacks. It also demonstrates effective mitigation techniques to protect systems against these threats. This tool is intended strictly for educational purposes or authorized security testing.
+This project is designed to simulate and analyze different types of network attacks, specifically ICMP Flood Attacks, SYN Flood Attacks, and Regex Injection Attacks. It also demonstrates effective mitigation techniques to protect systems against these threats. This tool is intended strictly for educational purposes.
 
 ## Prerequisites
 To run this project, you will need:
